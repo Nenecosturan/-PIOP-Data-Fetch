@@ -10,7 +10,8 @@ local Window = Rayfield:CreateWindow({
    Name = "•PIOP• | Data Fetcher |-ZENITH-",
    LoadingTitle = "LOADING 3D MENU & PLAYERS...",
    LoadingSubtitle = "Loading PIOP - AI Engine",
-   ConfigurationSaving = { Enabled = false },
+   Theme = "Serenity"
+      ConfigurationSaving = { Enabled = false },
    KeySystem = false 
 })
 
@@ -36,7 +37,7 @@ PillBtn.Size = UDim2.new(0, 110, 0, 26)
 PillBtn.Position = UDim2.new(0.5, -55, 0, 0)
 PillBtn.BackgroundColor3 = Color3.fromRGB(20, 22, 30)
 PillBtn.BackgroundTransparency = 0.1
-PillBtn.Text = "HOLO-EKRAN"
+PillBtn.Text = "•3D-SCREEN•"
 PillBtn.TextColor3 = Color3.fromRGB(180, 230, 255)
 PillBtn.Font = Enum.Font.GothamMedium -- ESTETİK DÜZELTME: Daha şık bir font
 PillBtn.TextSize = 12
@@ -184,7 +185,7 @@ local function getDetailedStats(p)
     s.Display = p.DisplayName
     s.Age = p.AccountAge
     s.Date = os.date("%d/%m/%Y", os.time() - (p.AccountAge * 86400))
-    s.Premium = p.MembershipType == Enum.MembershipType.Premium and "Evet ✅" or "Hayır ❌"
+    s.Premium = p.MembershipType == Enum.MembershipType.Premium and "Yes ✅" or "No ❌"
     s.Verified = p.HasVerifiedBadge and "Verified 🔵" or "Not Verified⚪"
     s.Platform = getPlatform(p)
     local isDev = (p:IsInGroup(1200769) or p.UserId == game.CreatorId)
@@ -196,7 +197,7 @@ end
 -- TAB 1: SERVER SCAN
 -- ==========================================
 local OverviewTab = Window:CreateTab("Server Scan", 4483362458)
-local MasterPara = OverviewTab:CreateParagraph({Title = "Checking Players...", Content = "Scanning Startup issue!"})
+local MasterPara = OverviewTab:CreateParagraph({Title = "Checking Players...", Content = "Action may be last for 5 seconds."})
 
 OverviewTab:CreateButton({
    Name = "•Scan Server•",
@@ -214,7 +215,7 @@ OverviewTab:CreateButton({
 -- ==========================================
 -- TAB 3: CANLI RAPOR (TEK SEKME)
 -- ==========================================
-local ReportTab = Window:CreateTab("Canlı Rapor", 4483362458)
+local ReportTab = Window:CreateTab("Single Person Info", 4483362458)
 
 ReportTab:CreateSection("🗂️ Basic Identity")
 local L_Name = ReportTab:CreateLabel("User: Loading...")
@@ -313,18 +314,18 @@ DeepTab:CreateButton({
             -- Chatten karakter tespiti ile yaş kırma
             if chatHistory:find("ez") or chatHistory:find("noob") or chatHistory:find("sigma") or chatHistory:find("skibidi") then
                 baseAge = 11 -- Toksik/Meme kelimeler kullanıyorsa yaşı küçült
-            elseif chatHistory:find("abi") or chatHistory:find("pls") then
+            elseif chatHistory:find("bro") or chatHistory:find("pls") then
                 baseAge = 12
             end
 
             -- Yaş aralığı oluştur (14 bulduysa 13-16 arası yazar)
             local minAge = math.clamp(baseAge - 1, 9, 30)
             local maxAge = minAge + 2
-            ageGuess = minAge .. "-" .. maxAge .. " Yaş Aralığı"
+            ageGuess = minAge .. "-" .. maxAge .. " Age range"
 
             -- 2. Psikolojik Profil Çıkarıcı
             if robuxVal > 25000 and aAge > 1000 then 
-                persona = "💎 Elit Profil (Deneyimli / Parası Olan)"
+                persona = "💎 Elite Profile (Deneyimli / Parası Olan)"
             elseif aAge > 2000 then 
                 persona = "👴 OG player"
             elseif chatHistory:find("ez") or chatHistory:find("noob") then
