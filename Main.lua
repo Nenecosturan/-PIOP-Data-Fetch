@@ -75,7 +75,9 @@ HoloGradient.Color = ColorSequence.new({
 HoloGradient.Rotation = 45
 
 RunService.RenderStepped:Connect(function()
-    HoloGradient.Rotation = HoloGradient.Rotation + 0.15
+    pcall(function() -- Script silindiğinde hata vermemesi için pcall eklendi
+        HoloGradient.Rotation = HoloGradient.Rotation + 0.15
+    end)
 end)
 
 -- ViewportFrame
@@ -93,13 +95,15 @@ local WorldModel = Instance.new("WorldModel", Viewport)
 local currentAvatar = nil
 
 RunService.RenderStepped:Connect(function()
-    if currentAvatar and currentAvatar.PrimaryPart then
-        local t = tick() * 0.5
-        VpCamera.CFrame = CFrame.new(
-            currentAvatar.PrimaryPart.Position + Vector3.new(math.sin(t) * 6, 1.5, math.cos(t) * 6),
-            currentAvatar.PrimaryPart.Position
-        )
-    end
+    pcall(function() -- Script silindiğinde hata vermemesi için pcall eklendi
+        if currentAvatar and currentAvatar.PrimaryPart then
+            local t = tick() * 0.5
+            VpCamera.CFrame = CFrame.new(
+                currentAvatar.PrimaryPart.Position + Vector3.new(math.sin(t) * 6, 1.5, math.cos(t) * 6),
+                currentAvatar.PrimaryPart.Position
+            )
+        end
+    end)
 end)
 
 -- Sürükle (Drag) vs Tıklama (Click) Mantığı
@@ -356,9 +360,30 @@ DeepTab:CreateButton({
             local chatLogs = Intel.Logs[targetPlayer.Name] or {}
             P_Chat:Set({Title = "Last Chat Logs", Content = #chatLogs > 0 and table.concat(chatLogs, "\n") or "Player didnt chat."})
             
-            Rayfield:Notify({Title = "Scanning complete", Content = targetPlayer.Name .. " Rendered successfully.", Duration = 4})
+            -- YENİ BİLDİRİM SİSTEMİ (Çift aşamalı)
+            Rayfield:Notify({Title = "Rendering", Content = targetPlayer.Name .. " Rendered successfully.", Duration = 3})
+            task.wait(0.5)
+            Rayfield:Notify({Title = "Scan Complete", Content = "check Single Person Info page", Duration = 5})
          end)
       end
+   end,
+})
+
+-- ==========================================
+-- TAB 4: SİSTEM YÖNETİMİ / YOK ETME SEKME
+-- ==========================================
+local ExitTab = Window:CreateTab("System Exit", 6031094678) 
+ExitTab:CreateSection("Script Management")
+
+ExitTab:CreateButton({
+   Name = "DESTROY SCRIPT & 3D MENU",
+   Callback = function()
+      -- Holografik 3D Monitörü Kapat
+      if screenGui then
+          screenGui:Destroy()
+      end
+      -- Ana Rayfield Kütüphanesini Kapat
+      Rayfield:Destroy()
    end,
 })
 
