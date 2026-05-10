@@ -7,9 +7,9 @@ local TweenService = game:GetService("TweenService")
 local CoreGui = game:GetService("CoreGui")
 
 local Window = Rayfield:CreateWindow({
-   Name = "•PIOP• HOLOGRAPHIC V17",
-   LoadingTitle = "3D İstihbarat Ağı Başlatılıyor...",
-   LoadingSubtitle = "by PIOP - 2026 AI Engine",
+   Name = "•PIOP• | Data Fetcher |-ZENITH-",
+   LoadingTitle = "LOADING 3D MENU & PLAYERS...",
+   LoadingSubtitle = "Loading PIOP - AI Engine",
    ConfigurationSaving = { Enabled = false },
    KeySystem = false 
 })
@@ -169,12 +169,12 @@ Players.PlayerAdded:Connect(hookChat)
 -- ==========================================
 local function getPlatform(p)
     if p == Players.LocalPlayer then
-        return UserInputService.TouchEnabled and "Mobil 📱" or "PC/Konsol 💻"
+        return UserInputService.TouchEnabled and "Mobile 📱" or "PC/Console 💻"
     else
         local hash = p.UserId % 10
-        if hash <= 6 then return "Mobil 📱" 
+        if hash <= 6 then return "Mobile 📱" 
         elseif hash <= 8 then return "PC 💻"
-        else return "Konsol 🎮" end
+        else return "console 🎮" end
     end
 end
 
@@ -185,10 +185,10 @@ local function getDetailedStats(p)
     s.Age = p.AccountAge
     s.Date = os.date("%d/%m/%Y", os.time() - (p.AccountAge * 86400))
     s.Premium = p.MembershipType == Enum.MembershipType.Premium and "Evet ✅" or "Hayır ❌"
-    s.Verified = p.HasVerifiedBadge and "Onaylı 🔵" or "Standart ⚪"
+    s.Verified = p.HasVerifiedBadge and "Verified 🔵" or "Not Verified⚪"
     s.Platform = getPlatform(p)
     local isDev = (p:IsInGroup(1200769) or p.UserId == game.CreatorId)
-    s.Status = isDev and "Yapımcı / Developer 🛠️" or "Standart Oyuncu 👤"
+    s.Status = isDev and "Creator / Developer 🛠️" or "Standart Player 👤"
     return s
 end
 
@@ -196,18 +196,18 @@ end
 -- TAB 1: SERVER SCAN
 -- ==========================================
 local OverviewTab = Window:CreateTab("Server Scan", 4483362458)
-local MasterPara = OverviewTab:CreateParagraph({Title = "İstihbarat Bekleniyor", Content = "Tarama başlatılmadı."})
+local MasterPara = OverviewTab:CreateParagraph({Title = "Checking Players...", Content = "Scanning Startup issue!"})
 
 OverviewTab:CreateButton({
-   Name = "SUNUCUYU TARA VE ANALİZ ET",
+   Name = "•Scan Server•",
    Callback = function()
       local report = ""
       for _, p in pairs(Players:GetPlayers()) do
          local stats = getDetailedStats(p)
          report = report .. "👤 " .. stats.Display .. " (@" .. stats.Name .. ")\n"
-         report = report .. "   ├ 🛠️ Rütbe: " .. stats.Status .. "\n   ├ 📱 Cihaz: " .. stats.Platform .. "\n   ├ 📅 Yaş: " .. stats.Age .. " Gün\n   └ 💎 Premium: " .. stats.Premium .. "\n\n"
+         report = report .. "   ├ 🛠️ Rank (Dev or sum): " .. stats.Status .. "\n   ├ 📱 Platform: " .. stats.Platform .. "\n   ├ 📅 Account Age: " .. stats.Age .. " day\n   └ 💎 Premium: " .. stats.Premium .. "\n\n"
       end
-      MasterPara:Set({Title = "Güncel Sunucu Durumu ("..#Players:GetPlayers().." Oyuncu)", Content = report})
+      MasterPara:Set({Title = "CURRENT SERVER STATUS ("..#Players:GetPlayers().." Player ", Content = report})
    end,
 })
 
@@ -216,29 +216,29 @@ OverviewTab:CreateButton({
 -- ==========================================
 local ReportTab = Window:CreateTab("Canlı Rapor", 4483362458)
 
-ReportTab:CreateSection("🗂️ Temel Kimlik")
-local L_Name = ReportTab:CreateLabel("İsim: Bekleniyor...")
-local L_Device = ReportTab:CreateLabel("Cihaz: -")
-local L_Age = ReportTab:CreateLabel("Kuruluş ve Yaş: -")
-local L_Premium = ReportTab:CreateLabel("Premium ve Rozet: -")
-local L_Status = ReportTab:CreateLabel("Statü: -")
+ReportTab:CreateSection("🗂️ Basic Identity")
+local L_Name = ReportTab:CreateLabel("User: Loading...")
+local L_Device = ReportTab:CreateLabel("Platform: -")
+local L_Age = ReportTab:CreateLabel("Account & real age(estimated): -")
+local L_Premium = ReportTab:CreateLabel("Premium & Badge: -")
+local L_Status = ReportTab:CreateLabel("Status: -")
 
-ReportTab:CreateSection("🧠 PIOP YAPAY ZEKA ANALİZİ (V3)")
-local L_Robux = ReportTab:CreateLabel("💰 Avatar Maliyeti: -")
-local L_AI_Age = ReportTab:CreateLabel("🎂 Tahmini Yaş: -")
-local L_Persona = ReportTab:CreateLabel("🎭 Psikolojik Profil: -")
+ReportTab:CreateSection("🧠 PIOP AI ANALYSIS ")
+local L_Robux = ReportTab:CreateLabel("💰 Avatar Cost: -")
+local L_AI_Age = ReportTab:CreateLabel("🎂 Estimated Age: -")
+local L_Persona = ReportTab:CreateLabel("🎭 Phsycologyc personality: -")
 
-ReportTab:CreateSection("💬 Canlı Chat Logları")
-local P_Chat = ReportTab:CreateParagraph({Title = "Son İletişim Verileri", Content = "Kişi seçilmedi."})
+ReportTab:CreateSection("💬 Live Chat Logs")
+local P_Chat = ReportTab:CreateParagraph({Title = "Last Chat Logs", Content = "Player hasnt been chosen."})
 
 -- ==========================================
 -- TAB 2: DEEP SCAN (ARAMA MODÜLÜ)
 -- ==========================================
 local DeepTab = Window:CreateTab("Deep Intel", 4483362458)
-DeepTab:CreateSection("Hedef Belirleme")
+DeepTab:CreateSection("Choose Target")
 
 local Dropdown = DeepTab:CreateDropdown({
-   Name = "Oyuncu Seç",
+   Name = "Choose Player",
    Options = {},
    CurrentOption = "",
    MultipleOptions = false,
@@ -249,7 +249,7 @@ local Dropdown = DeepTab:CreateDropdown({
 })
 
 DeepTab:CreateButton({
-   Name = "Listeyi Güncelle",
+   Name = "Refresh List",
    Callback = function()
       local names = {}
       for _, v in pairs(Players:GetPlayers()) do table.insert(names, v.Name) end
@@ -257,10 +257,10 @@ DeepTab:CreateButton({
    end
 })
 
-DeepTab:CreateSection("İleri Düzey Operasyon")
+DeepTab:CreateSection("Fetch Player DATA")
 
 DeepTab:CreateButton({
-   Name = "RÖNTGENİ BAŞLAT (VERİLERİ GÜNCELLE)",
+   Name = "• FETCH DATA •",
    Callback = function()
       if Intel.SelectedTarget == "" or Intel.SelectedTarget == "nil" then return end
       local targetPlayer = Players:FindFirstChild(Intel.SelectedTarget)
@@ -268,8 +268,8 @@ DeepTab:CreateButton({
       if targetPlayer then
          task.spawn(function()
             for i = 1, 3 do
-                L_Name:Set("⚡ Analiz Ediliyor" .. string.rep(".", i))
-                L_Robux:Set("⚡ Yapay Zeka Veri Çekiyor...")
+                L_Name:Set("⚡ ANALYZING" .. string.rep(".", i))
+                L_Robux:Set("⚡ AI getting information...")
                 task.wait(0.2)
             end
 
@@ -326,36 +326,36 @@ DeepTab:CreateButton({
             if robuxVal > 25000 and aAge > 1000 then 
                 persona = "💎 Elit Profil (Deneyimli / Parası Olan)"
             elseif aAge > 2000 then 
-                persona = "👴 Kadim Efsane (Eski Toprak / Veteran)"
+                persona = "👴 OG player"
             elseif chatHistory:find("ez") or chatHistory:find("noob") then
-                persona = "☠️ Toksik / Rekabetçi (Tryhard)"
+                persona = "☠️ Toxic / Tryhard player"
             elseif #Intel.Logs[targetPlayer.Name] > 5 then 
-                persona = "🗣️ Sosyal Kelebek / İletişime Açık"
+                persona = "🗣️ Social Player "
             elseif nameLower:find("xx") or displayLower:find("demon") or displayLower:find("blood") then
-                persona = "🦇 Edgy / Havalı Görünmeye Çalışan"
+                persona = "🦇 Edgy / Cool looking player"
             elseif robuxVal == 0 and aAge < 50 then 
-                persona = "👶 Yeni Başlayan (veya Gizli Troll Hesap)"
+                persona = "👶 New / troll player"
             elseif robuxVal > 5000 and robuxVal <= 25000 then
-                persona = "🎨 Estetik Sever (Görünüşüne Önem Veren)"
+                persona = "🎨 Esthetic player"
             else 
-                persona = "👤 Standart / Sakin Oyuncu" 
+                persona = "👤 Standart / Chill player" 
             end
 
             -- Verileri Menüye Basma
-            L_Name:Set("İsim: " .. s.Display .. " (@" .. s.Name .. ")")
-            L_Device:Set("Cihaz: " .. s.Platform)
-            L_Age:Set("Kuruluş: " .. s.Date .. " (" .. s.Age .. " Gün)")
-            L_Premium:Set("Premium: " .. s.Premium .. " | Rozet: " .. s.Verified)
-            L_Status:Set("Statü: " .. s.Status)
+            L_Name:Set("User: " .. s.Display .. " (@" .. s.Name .. ")")
+            L_Device:Set("Platform: " .. s.Platform)
+            L_Age:Set("Account age: " .. s.Date .. " (" .. s.Age .. " Gün)")
+            L_Premium:Set("Premium: " .. s.Premium .. " | Badge: " .. s.Verified)
+            L_Status:Set("Status: " .. s.Status)
 
-            L_Robux:Set("💰 Avatar Maliyeti: ~" .. robuxVal .. " Robux")
-            L_AI_Age:Set("🎂 Tahmini Gerçek Yaş: " .. ageGuess)
-            L_Persona:Set("🎭 Psikolojik Profil: " .. persona)
+            L_Robux:Set("💰 Avatar Cost: ~" .. robuxVal .. " Robux")
+            L_AI_Age:Set("🎂 Estimated Real Age: " .. ageGuess)
+            L_Persona:Set("🎭 Phsocologyc personality: " .. persona)
 
             local chatLogs = Intel.Logs[targetPlayer.Name] or {}
-            P_Chat:Set({Title = "Son İletişim Verileri", Content = #chatLogs > 0 and table.concat(chatLogs, "\n") or "Oyuncu henüz konuşmadı."})
+            P_Chat:Set({Title = "Last Chat Logs", Content = #chatLogs > 0 and table.concat(chatLogs, "\n") or "Player didnt chat."})
             
-            Rayfield:Notify({Title = "İstihbarat Tamam", Content = targetPlayer.Name .. " başarıyla modellendi.", Duration = 4})
+            Rayfield:Notify({Title = "Scanning complete", Content = targetPlayer.Name .. " Rendered successfully.", Duration = 4})
          end)
       end
    end,
