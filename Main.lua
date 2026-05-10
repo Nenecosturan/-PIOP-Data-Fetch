@@ -10,7 +10,7 @@ local Window = Rayfield:CreateWindow({
    Name = "•PIOP• | Data Fetcher |-ZENITH-",
    LoadingTitle = "LOADING 3D MENU & PLAYERS...",
    LoadingSubtitle = "Loading PIOP - AI Engine",
-   Theme = "Serenity"
+   Theme = "Serenity",
       ConfigurationSaving = { Enabled = false },
    KeySystem = false 
 })
