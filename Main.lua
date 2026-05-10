@@ -200,7 +200,7 @@ end
 -- ==========================================
 -- TAB 1: SERVER SCAN
 -- ==========================================
-local OverviewTab = Window:CreateTab("Server Scan", 7072724424)
+local OverviewTab = Window:CreateTab("Server Scan", 6026568213)
 local MasterPara = OverviewTab:CreateParagraph({Title = "Checking Players...", Content = "Action may be last for 5 seconds."})
 
 OverviewTab:CreateButton({
@@ -219,12 +219,12 @@ OverviewTab:CreateButton({
 -- ==========================================
 -- TAB 3: CANLI RAPOR (TEK SEKME)
 -- ==========================================
-local ReportTab = Window:CreateTab("Single Person Info", 6026568213)
+local ReportTab = Window:CreateTab("Single Person Info", "user")
 
 ReportTab:CreateSection("🗂️ Basic Identity")
-local L_Name = ReportTab:CreateLabel("User: Loading...")
+local L_Name = ReportTab:CreateLabel("User:...")
 local L_Device = ReportTab:CreateLabel("Platform: -")
-local L_Age = ReportTab:CreateLabel("Account & real age(estimated): -")
+local L_Age = ReportTab:CreateLabel("Account age: -")
 local L_Premium = ReportTab:CreateLabel("Premium & Badge: -")
 local L_Status = ReportTab:CreateLabel("Status: -")
 
@@ -349,7 +349,7 @@ DeepTab:CreateButton({
             -- Verileri Menüye Basma
             L_Name:Set("User: " .. s.Display .. " (@" .. s.Name .. ")")
             L_Device:Set("Platform: " .. s.Platform)
-            L_Age:Set("Account age: " .. s.Date .. " (" .. s.Age .. " Gün)")
+            L_Age:Set("Account age: " .. s.Date .. " (" .. s.Age .. " Day)")
             L_Premium:Set("Premium: " .. s.Premium .. " | Badge: " .. s.Verified)
             L_Status:Set("Status: " .. s.Status)
 
