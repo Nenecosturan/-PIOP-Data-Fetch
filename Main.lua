@@ -196,7 +196,7 @@ end
 -- ==========================================
 -- TAB 1: SERVER SCAN
 -- ==========================================
-local OverviewTab = Window:CreateTab("Server Scan", 4483362458)
+local OverviewTab = Window:CreateTab("Server Scan", 7072724424)
 local MasterPara = OverviewTab:CreateParagraph({Title = "Checking Players...", Content = "Action may be last for 5 seconds."})
 
 OverviewTab:CreateButton({
@@ -215,7 +215,7 @@ OverviewTab:CreateButton({
 -- ==========================================
 -- TAB 3: CANLI RAPOR (TEK SEKME)
 -- ==========================================
-local ReportTab = Window:CreateTab("Single Person Info", 4483362458)
+local ReportTab = Window:CreateTab("Single Person Info", 6026568213)
 
 ReportTab:CreateSection("🗂️ Basic Identity")
 local L_Name = ReportTab:CreateLabel("User: Loading...")
@@ -235,7 +235,7 @@ local P_Chat = ReportTab:CreateParagraph({Title = "Last Chat Logs", Content = "P
 -- ==========================================
 -- TAB 2: DEEP SCAN (ARAMA MODÜLÜ)
 -- ==========================================
-local DeepTab = Window:CreateTab("Deep Intel", 4483362458)
+local DeepTab = Window:CreateTab("Deep Intel", 6031154871)
 DeepTab:CreateSection("Choose Target")
 
 local Dropdown = DeepTab:CreateDropdown({
